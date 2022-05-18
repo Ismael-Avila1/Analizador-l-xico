@@ -1,5 +1,10 @@
+using System;
+using System.Text.RegularExpressions;
+
+
 namespace Analizador
 {
+    
     public partial class Form1 : Form
     {
 
@@ -41,60 +46,140 @@ namespace Analizador
             string cadena = textBoxInput.Text;
             int estado = INICIO;
 
-            for (int i = 0; i < cadena.Length; i++)
-            {
 
-                switch (estado)
-                {
+            for(int i=0; i<cadena.Length; i++) {
+
+                switch(estado) {
                     case INICIO:
+                        if(cadena[i].ToString() == "-")
+                            estado = Q1;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q2;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]"))
+                            estado = Q5;
+                        else if (cadena[i].ToString() == "i")
+                            estado = Q15;
+                        
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q1:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q2;
+                        else if(cadena[i].ToString() == ".")
+                            estado = Q3;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q2:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q2;
+                        else if(cadena[i].ToString() == ".")
+                            estado = Q3;
+                        else
+                            estado = ERROR;
                         break;
+
 
                     case Q3:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q4;
+                        else
+                            estado = ERROR;
                         break;
-
 
 
                     case Q4:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q4;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q5:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q5;
+                        else if(cadena[i].ToString() == "=")
+                            estado = Q6;
+                        else
+                            estado = ERROR;
                         break;
 
+
                     case Q6:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q7;
+                        else if(cadena[i].ToString() == "-")
+                            estado = Q12;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]"))
+                            estado = Q13;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q7:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]"))
+                            estado = Q6;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q7;
+                        else if(cadena[i].ToString() == ".")
+                            estado = Q8;
+                        else if(cadena[i].ToString() == ";")
+                            estado = Q11;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q8:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q9;
+                        else
+                            estado = ERROR;
                         break;
 
+
                     case Q9:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q9;
+                        else if(cadena[i].ToString() == ";")
+                            estado = Q10;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q10:
                         break;
 
+
                     case Q11:
                         break;
 
 
                     case Q12:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q7;
+                        else if(cadena[i].ToString() == ".")
+                            estado = Q8;
+                        else
+                            estado = ERROR;
                         break;
 
+
                     case Q13:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q13;
+                        else if(cadena[i].ToString() == ";")
+                            estado = Q14;
+                        else
+                            estado = ERROR;
                         break;
 
 
@@ -102,47 +187,94 @@ namespace Analizador
                         break;
 
 
-
                     case Q15:
+                        if(cadena[i].ToString() == "f")
+                            estado = Q16;
+                        else
+                            estado = ERROR;
                         break;
+
 
                     case Q16:
+                        if(cadena[i].ToString() == "(")
+                            estado = Q17;
+                        else
+                            estado = ERROR;
                         break;
+
 
                     case Q17:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q18;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q19;
+                        else
+                            estado = ERROR;
                         break;
 
+
                     case Q18:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q18;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))
+                            estado = Q20;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q19:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q19;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))
+                            estado = Q20;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q20:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q21;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q23;
+                        else
+                            estado = ERROR;
                         break;
 
+
                     case Q21:
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q21;
+                        else if(cadena[i].ToString() == ")")
+                            estado = Q22;
+                        else
+                            estado = ERROR;
                         break;
 
 
                     case Q22:
                         break;
 
+
                     case Q23:
+                        if (Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            estado = Q23;
+                        else if (cadena[i].ToString() == ")")
+                            estado = Q22;
                         break;
 
 
                     case ERROR:
-                        break;
-
-
+                        estado = ERROR;
+                    break;
                 }
 
             }
 
+
         }
+
 
 
 
