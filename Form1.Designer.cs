@@ -69,6 +69,7 @@
             this.buttonAnalizar.TabIndex = 3;
             this.buttonAnalizar.Text = "Analizar";
             this.buttonAnalizar.UseVisualStyleBackColor = false;
+            this.buttonAnalizar.Click += new System.EventHandler(this.buttonAnalizar_Click);
             // 
             // textBoxInput
             // 
