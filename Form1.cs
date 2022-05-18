@@ -190,6 +190,10 @@ namespace Analizador
                     case Q15:
                         if(cadena[i].ToString() == "f")
                             estado = Q16;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            estado = Q5;
+                        else if (cadena[i].ToString() == "=")
+                            estado = Q6;
                         else
                             estado = ERROR;
                         break;
@@ -272,8 +276,11 @@ namespace Analizador
 
             }
 
-
+                detalles(estado, cadena);
         }
+
+
+        
 
 
 
