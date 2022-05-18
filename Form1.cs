@@ -480,7 +480,7 @@ namespace Analizador
                         indAux = i;
                     }
 
-                s += "• El segundo operando es: ";
+                s += "\n• El segundo operando es: ";
                 for(int i=indAux+1; i<cadena.Length-1; i++)
                     s += cadena[i].ToString();
 
