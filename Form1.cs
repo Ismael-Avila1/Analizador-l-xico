@@ -7,6 +7,7 @@ namespace Analizador
     
     public partial class Form1 : Form
     {
+        //estados
         const int INICIO = 0;
         const int ERROR = -1;
         const int Q1 = 1;
@@ -46,28 +47,28 @@ namespace Analizador
             int estado = INICIO;
 
 
-            for(int i=0; i<cadena.Length; i++) {
+            for(int i=0; i<cadena.Length; i++) { // se recorre la cadena ingresada
 
-                switch(estado) {
-                    case INICIO:
-                        if(cadena[i].ToString() == "-")
+                switch(estado) {    // selecciona opcion segun el estado 
+                    case INICIO:    // estado de inico
+                        if(cadena[i].ToString() == "-") // se busca un -
                             estado = Q1;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) // se busca un digito
                             estado = Q2;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]"))
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]"))   // se busca una letra de la a-h y de j-z
                             estado = Q5;
-                        else if (cadena[i].ToString() == "i")
+                        else if (cadena[i].ToString() == "i") // se busca la letra i
                             estado = Q15;
                         
                         else
-                            estado = ERROR;
+                            estado = ERROR; // se envia al estado de error
                         break;
 
 
                     case Q1:
                         if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q2;
-                        else if(cadena[i].ToString() == ".")
+                        else if(cadena[i].ToString() == ".") // se busca un punto
                             estado = Q3;
                         else
                             estado = ERROR;
@@ -101,9 +102,9 @@ namespace Analizador
 
 
                     case Q5:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) // se busca letra de a-z y digito del 0 al 9
                             estado = Q5;
-                        else if(cadena[i].ToString() == "=")
+                        else if(cadena[i].ToString() == "=") // se busca el =
                             estado = Q6;
                         else
                             estado = ERROR;
@@ -115,7 +116,7 @@ namespace Analizador
                             estado = Q7;
                         else if(cadena[i].ToString() == "-")
                             estado = Q12;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]"))
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]")) // se busca letra de la a-z
                             estado = Q13;
                         else
                             estado = ERROR;
@@ -123,7 +124,7 @@ namespace Analizador
 
 
                     case Q7:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca simbolo +-*/
                             estado = Q6;
                         else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q7;
@@ -219,7 +220,7 @@ namespace Analizador
                     case Q18:
                         if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
                             estado = Q18;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]")) // se busca entre >= <= > < != ==
                             estado = Q20;
                         else
                             estado = ERROR;
@@ -229,7 +230,7 @@ namespace Analizador
                     case Q19:
                         if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q19;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))    // se busca entre >= <= > < != ==
                             estado = Q20;
                         else
                             estado = ERROR;
@@ -277,17 +278,17 @@ namespace Analizador
 
             }
 
-                detalles(estado, cadena);
+                detalles(estado, cadena); // se pide el detalle de la cadena
         }
 
 
         void detalles(int estado, string cadena)
         {
 
-            if (estado == ERROR)
+            if (estado == ERROR) // si es el estado de error
                 MessageBox.Show("La cadena ingresada es inválida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            else if(estado == Q2) {
+            else if(estado == Q2) { // si es el estado final Q2
                 string s = "La cadena ingresada es un número. " + "Los detalles de la cadena son los siguientes: \n\n";
                 s += "• Es un número con signo positivo\n";
                 s += "• Es un número entero\n";
@@ -296,10 +297,10 @@ namespace Analizador
                     s += cadena[i].ToString();
 
                 MessageBox.Show(s, "Detalles de la Cadena", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            } 
 
 
-            else if(estado == Q4) {
+            else if(estado == Q4) { // si es el estado final q4
                 bool isReal = false;
                 string s = "La cadena ingresada es un número. \n" + "Los detalles de la cadena son los siguientes: \n\n";
 
@@ -330,8 +331,7 @@ namespace Analizador
             }
 
 
-            else if (estado == Q10)
-            {
+            else if(estado == Q10) { // si termina en el estado q10
                 string s = "La cadena ingresada es una asignación de variable con un entero. " + "Los detalles de la cadena son los siguientes: \n\n";
 
                 s += "• Nombre de la variable: ";
@@ -373,7 +373,7 @@ namespace Analizador
             }
 
 
-            else if(estado == Q11) {
+            else if(estado == Q11) { // si termina en el estado q11
                 string s = "La cadena ingresada es una asignación de variable con un real. " + "Los detalles de la cadena son los siguientes: \n\n";
                 bool hayOperacion = false;
 
@@ -425,7 +425,7 @@ namespace Analizador
             }
 
 
-            else if (estado == Q14) {
+            else if (estado == Q14) { // si termina en el estado q14
                 string s = "La cadena ingresada es una asignación de variable con otra variable. " + "Los detalles de la cadena son los siguientes: \n\n";
 
                 s += "• Nombre de la variable: ";
@@ -457,7 +457,7 @@ namespace Analizador
             }
 
 
-            else if (estado == Q22) {
+            else if (estado == Q22) { // si termina en el estado q22
                 string s = "La cadena ingresada es una condicional. " + "Los detalles de la cadena son los siguientes: \n\n";
                 int indAux = 0;
 
@@ -488,8 +488,6 @@ namespace Analizador
 
             }
         }
-
-
 
 
     }
