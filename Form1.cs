@@ -70,6 +70,7 @@ namespace Analizador
                         }
                         else if(cadena[i].ToString() == "i") { // se busca la letra i
                             estado = Q15;
+                            textBoxEstados.Text += "Q" + estado + ", ";
                         }
                         else { // se envia al estado de error
                             estado = ERROR;
@@ -141,6 +142,7 @@ namespace Analizador
                         }
                         else if(cadena[i].ToString() == "=") { // se busca el =
                             estado = Q6;
+                            textBoxEstados.Text += "Q" + estado + ", ";
                         }
                         else {
                             estado = ERROR;
@@ -153,12 +155,10 @@ namespace Analizador
                         if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q7;
                             textBoxEstados.Text += "Q" + estado + ", ";
-
                         }
                         else if(cadena[i].ToString() == "-")                         {
                             estado = Q12;
                             textBoxEstados.Text += "Q" + estado + ", ";
-
                         }
                         else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]")) { // se busca letra de la a-z
                             estado = Q13;
@@ -166,7 +166,6 @@ namespace Analizador
                         else {
                             estado = ERROR;
                             textBoxEstados.Text += "ERROR";
-
                         }
                         break;
 
@@ -275,7 +274,6 @@ namespace Analizador
                         else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q5;
                             textBoxEstados.Text += "Q" + estado + ", ";
-
                         }
                         else if(cadena[i].ToString() == "=") {
                             estado = Q6;
@@ -416,13 +414,13 @@ namespace Analizador
         {
 
             if (estado == ERROR) // si es el estado de error
-                MessageBox.Show("La cadena ingresada es inválida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La cadena ingresada es invï¿½lida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             else if(estado == Q2) { // si es el estado final Q2
-                string s = "La cadena ingresada es un número. " + "Los detalles de la cadena son los siguientes: \n\n";
-                s += "• Es un número con signo positivo\n";
-                s += "• Es un número entero\n";
-                s += "• El valor del número es: ";
+                string s = "La cadena ingresada es un nï¿½mero. " + "Los detalles de la cadena son los siguientes: \n\n";
+                s += "ï¿½ Es un nï¿½mero con signo positivo\n";
+                s += "ï¿½ Es un nï¿½mero entero\n";
+                s += "ï¿½ El valor del nï¿½mero es: ";
                 for(int i=0; i<cadena.Length; i++)
                     s += cadena[i].ToString();
 
@@ -432,13 +430,13 @@ namespace Analizador
 
             else if(estado == Q4) { // si es el estado final q4
                 bool isReal = false;
-                string s = "La cadena ingresada es un número. \n" + "Los detalles de la cadena son los siguientes: \n\n";
+                string s = "La cadena ingresada es un nï¿½mero. \n" + "Los detalles de la cadena son los siguientes: \n\n";
 
 
                 if(cadena[0].ToString() == "-")
-                    s += "• Es un número con signo negativo\n";
+                    s += "ï¿½ Es un nï¿½mero con signo negativo\n";
                 else
-                    s += "• Es un número con signo positivo\n";
+                    s += "ï¿½ Es un nï¿½mero con signo positivo\n";
 
                 for(int i=0; i<cadena.Length; i++)
                     if(cadena[i].ToString() == ".") {
@@ -447,12 +445,12 @@ namespace Analizador
                     }
 
                 if(isReal)
-                    s += "• Es un número real\n";
+                    s += "ï¿½ Es un nï¿½mero real\n";
                 else
-                    s += "• Es un número entero\n";
+                    s += "ï¿½ Es un nï¿½mero entero\n";
 
 
-                s += "• El valor del número es: ";
+                s += "ï¿½ El valor del nï¿½mero es: ";
 
                 for(int i=0; i<cadena.Length; i++)
                     s += cadena[i].ToString();
@@ -462,9 +460,9 @@ namespace Analizador
 
 
             else if(estado == Q10) { // si termina en el estado q10
-                string s = "La cadena ingresada es una asignación de variable con un entero. " + "Los detalles de la cadena son los siguientes: \n\n";
+                string s = "La cadena ingresada es una asignaciï¿½n de variable con un entero. " + "Los detalles de la cadena son los siguientes: \n\n";
 
-                s += "• Nombre de la variable: ";
+                s += "ï¿½ Nombre de la variable: ";
                 for(int i=0; i<cadena.Length; i++) {
                     if(cadena[i].ToString() == "=")
                         break;
@@ -472,11 +470,11 @@ namespace Analizador
                     s += cadena[i].ToString();
                 }
 
-                s += "\n• El operador '=' es un operador de asignación\n";
+                s += "\nï¿½ El operador '=' es un operador de asignaciï¿½n\n";
 
-                s += "• El valor asignado a la variable es una operación entre dos números\n";
+                s += "ï¿½ El valor asignado a la variable es una operaciï¿½n entre dos nï¿½meros\n";
                 
-                s += "• La operación es:";
+                s += "ï¿½ La operaciï¿½n es:";
 
                 for(int i=0; i<cadena.Length; i++)
                     if(cadena[i].ToString() == "+" || cadena[i].ToString() == "-" || cadena[i].ToString() == "*" || cadena[i].ToString() == "/") {
@@ -484,7 +482,7 @@ namespace Analizador
                         break;
                     }
 
-                s += "• El valor asignado a la variable es: ";
+                s += "ï¿½ El valor asignado a la variable es: ";
 
                 int indiceValor = 0;
                 for(int i=0; i<cadena.Length; i++)
@@ -496,7 +494,7 @@ namespace Analizador
                 for(int i=indiceValor; i<cadena.Length - 1; i++)
                     s += cadena[i].ToString();
 
-                s += "\n• El símbolo ';' es símbolo terminal\n";
+                s += "\nï¿½ El sï¿½mbolo ';' es sï¿½mbolo terminal\n";
 
                 MessageBox.Show(s, "Detalles de la Cadena", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -504,10 +502,10 @@ namespace Analizador
 
 
             else if(estado == Q11) { // si termina en el estado q11
-                string s = "La cadena ingresada es una asignación de variable con un real. " + "Los detalles de la cadena son los siguientes: \n\n";
+                string s = "La cadena ingresada es una asignaciï¿½n de variable con un real. " + "Los detalles de la cadena son los siguientes: \n\n";
                 bool hayOperacion = false;
 
-                s += "• Nombre de la variable: ";
+                s += "ï¿½ Nombre de la variable: ";
                 for(int i=0; i<cadena.Length; i++) {
                     if(cadena[i].ToString() == "=")
                         break;
@@ -515,7 +513,7 @@ namespace Analizador
                     s += cadena[i].ToString();
                 }
 
-                s += "\n• El operador '=' es un operador de asignación\n";
+                s += "\nï¿½ El operador '=' es un operador de asignaciï¿½n\n";
 
                 for(int i=0; i<cadena.Length; i++)
                     if(cadena[i].ToString() == "+" || cadena[i].ToString() == "-" || cadena[i].ToString() == "*" || cadena[i].ToString() == "/") {
@@ -524,9 +522,9 @@ namespace Analizador
                     }
 
                 if(hayOperacion) {
-                    s += "• El valor asignado a la variable es una operación entre dos números\n";
+                    s += "ï¿½ El valor asignado a la variable es una operaciï¿½n entre dos nï¿½meros\n";
 
-                    s += "• La operación es:";
+                    s += "ï¿½ La operaciï¿½n es:";
 
                     for(int i=0; i<cadena.Length; i++)
                         if(cadena[i].ToString() == "+" || cadena[i].ToString() == "-" || cadena[i].ToString() == "*" || cadena[i].ToString() == "/") {
@@ -536,7 +534,7 @@ namespace Analizador
                 }
 
 
-                s += "• El valor asignado a la variable es: ";
+                s += "ï¿½ El valor asignado a la variable es: ";
 
                 int indiceValor = 0;
                 for(int i=0; i<cadena.Length; i++)
@@ -548,7 +546,7 @@ namespace Analizador
                 for(int i=indiceValor; i<cadena.Length - 1; i++)
                     s += cadena[i].ToString();
 
-                s += "\n• El símbolo ';' es símbolo terminal\n";
+                s += "\nï¿½ El sï¿½mbolo ';' es sï¿½mbolo terminal\n";
 
                 MessageBox.Show(s, "Detalles de la Cadena", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -556,9 +554,9 @@ namespace Analizador
 
 
             else if (estado == Q14) { // si termina en el estado q14
-                string s = "La cadena ingresada es una asignación de variable con otra variable. " + "Los detalles de la cadena son los siguientes: \n\n";
+                string s = "La cadena ingresada es una asignaciï¿½n de variable con otra variable. " + "Los detalles de la cadena son los siguientes: \n\n";
 
-                s += "• Nombre de la variable: ";
+                s += "ï¿½ Nombre de la variable: ";
                 for(int i=0; i<cadena.Length; i++) {
                     if(cadena[i].ToString() == "=")
                         break;
@@ -566,9 +564,9 @@ namespace Analizador
                     s += cadena[i].ToString();
                 }
 
-                s += "\n• El operador '=' es un operador de asignación\n";
+                s += "\nï¿½ El operador '=' es un operador de asignaciï¿½n\n";
 
-                s += "• El valor asignado a la variable es: ";
+                s += "ï¿½ El valor asignado a la variable es: ";
 
                 int indiceValor = 0;
                 for(int i=0; i<cadena.Length; i++)
@@ -580,7 +578,7 @@ namespace Analizador
                 for(int i=indiceValor; i<cadena.Length - 1; i++)
                     s += cadena[i].ToString();
 
-                s += "\n• El símbolo ';' es símbolo terminal\n";
+                s += "\nï¿½ El sï¿½mbolo ';' es sï¿½mbolo terminal\n";
 
                 MessageBox.Show(s, "Detalles de la Cadena", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -591,9 +589,9 @@ namespace Analizador
                 string s = "La cadena ingresada es una condicional. " + "Los detalles de la cadena son los siguientes: \n\n";
                 int indAux = 0;
 
-                s += "• if es la instrucción de comparación\n";
+                s += "ï¿½ if es la instrucciï¿½n de comparaciï¿½n\n";
 
-                s += "• El primer operando es: ";
+                s += "ï¿½ El primer operando es: ";
                 for(int i=3; i<cadena.Length; i++) {
                     if(cadena[i].ToString() == ">=" || cadena[i].ToString() == "<=" || cadena[i].ToString() == ">" || cadena[i].ToString() == "<" || cadena[i].ToString() == "!=" || cadena[i].ToString() == "==") {
                         break;
@@ -602,7 +600,7 @@ namespace Analizador
                     s += cadena[i].ToString();
                 }
 
-                s += "\n• El operador usado para la comparación es: ";
+                s += "\nï¿½ El operador usado para la comparaciï¿½n es: ";
 
                 for(int i=0; i<cadena.Length; i++)
                     if(cadena[i].ToString() == ">" || cadena[i].ToString() == "<" || cadena[i].ToString() == "!" || cadena[i].ToString() == "=") {
@@ -610,7 +608,7 @@ namespace Analizador
                         indAux = i;
                     }
 
-                s += "\n• El segundo operando es: ";
+                s += "\nï¿½ El segundo operando es: ";
                 for(int i=indAux+1; i<cadena.Length-1; i++)
                     s += cadena[i].ToString();
 
