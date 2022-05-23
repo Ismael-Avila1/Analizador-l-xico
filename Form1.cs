@@ -55,11 +55,12 @@ namespace Analizador
                             estado = Q1;
                         else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) // se busca un digito
                             estado = Q2;
+                        else if (cadena[i].ToString() == ".") // se busca un punto decimal
+                            estado = Q3;
                         else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]"))   // se busca una letra de la a-h y de j-z
                             estado = Q5;
                         else if (cadena[i].ToString() == "i") // se busca la letra i
                             estado = Q15;
-                        
                         else
                             estado = ERROR; // se envia al estado de error
                         break;
@@ -102,7 +103,7 @@ namespace Analizador
 
 
                     case Q5:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) // se busca letra de a-z y digito del 0 al 9
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) // se busca letra de a-z o digito del 0 al 9
                             estado = Q5;
                         else if(cadena[i].ToString() == "=") // se busca el =
                             estado = Q6;
@@ -124,7 +125,7 @@ namespace Analizador
 
 
                     case Q7:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca simbolo +-*/
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca entre + - * /
                             estado = Q6;
                         else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q7;
@@ -146,7 +147,9 @@ namespace Analizador
 
 
                     case Q9:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca entre + - * /
+                            estado = Q6;
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q9;
                         else if(cadena[i].ToString() == ";")
                             estado = Q10;
@@ -166,8 +169,6 @@ namespace Analizador
                     case Q12:
                         if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
                             estado = Q7;
-                        else if(cadena[i].ToString() == ".")
-                            estado = Q8;
                         else
                             estado = ERROR;
                         break;
@@ -238,7 +239,7 @@ namespace Analizador
 
 
                     case Q20:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))     // se busca entre >= <= > < != ==
                             estado = Q20;
                         else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
                             estado = Q21;
