@@ -94,7 +94,6 @@
             // 
             // textBoxEstados
             // 
-            this.textBoxEstados.Enabled = false;
             this.textBoxEstados.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxEstados.Location = new System.Drawing.Point(367, 346);
             this.textBoxEstados.Multiline = true;

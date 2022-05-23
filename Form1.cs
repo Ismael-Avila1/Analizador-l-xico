@@ -46,115 +46,184 @@ namespace Analizador
             string cadena = textBoxInput.Text;
             int estado = INICIO;
 
+            textBoxEstados.Text = "";
 
-            for(int i=0; i<cadena.Length; i++) { // se recorre la cadena ingresada
+            for (int i=0; i<cadena.Length; i++) { // se recorre la cadena ingresada
 
                 switch(estado) {    // selecciona opcion segun el estado 
-                    case INICIO:    // estado de inico
-                        if(cadena[i].ToString() == "-") // se busca un -
+                    case INICIO:    // estado de inicio
+                        if(cadena[i].ToString() == "-") { // se busca un -
                             estado = Q1;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) // se busca un digito
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) { // se busca un digito
                             estado = Q2;
-                        else if (cadena[i].ToString() == ".") // se busca un punto decimal
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ".") { // se busca un punto decimal
                             estado = Q3;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]"))   // se busca una letra de la a-h y de j-z
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-hj-z]")) {   // se busca una letra de la a-h y de j-z
                             estado = Q5;
-                        else if (cadena[i].ToString() == "i") // se busca la letra i
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == "i") { // se busca la letra i
                             estado = Q15;
-                        else
-                            estado = ERROR; // se envia al estado de error
+                        }
+                        else { // se envia al estado de error
+                            estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        } 
                         break;
 
 
                     case Q1:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q2;
-                        else if(cadena[i].ToString() == ".") // se busca un punto
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ".") { // se busca un punto
                             estado = Q3;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q2:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q2;
-                        else if(cadena[i].ToString() == ".")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ".") {
                             estado = Q3;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q3:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q4;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q4:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q4;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q5:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) // se busca letra de a-z o digito del 0 al 9
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) { // se busca letra de a-z o digito del 0 al 9
                             estado = Q5;
-                        else if(cadena[i].ToString() == "=") // se busca el =
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == "=") { // se busca el =
                             estado = Q6;
-                        else
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q6:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q7;
-                        else if(cadena[i].ToString() == "-")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+
+                        }
+                        else if(cadena[i].ToString() == "-")                         {
                             estado = Q12;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]")) // se busca letra de la a-z
+                            textBoxEstados.Text += "Q" + estado + ", ";
+
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z]")) { // se busca letra de la a-z
                             estado = Q13;
-                        else
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+
+                        }
                         break;
 
 
                     case Q7:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca entre + - * /
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) { // se busca entre + - * /
                             estado = Q6;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))                         {
                             estado = Q7;
-                        else if(cadena[i].ToString() == ".")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ".") {
                             estado = Q8;
-                        else if(cadena[i].ToString() == ";")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ";") {
                             estado = Q11;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q8:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q9;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q9:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) // se busca entre + - * /
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x2B\x2D\x2A\x2F]")) { // se busca entre + - * /
                             estado = Q6;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q9;
-                        else if(cadena[i].ToString() == ";")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ";") {
                             estado = Q10;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
@@ -167,20 +236,30 @@ namespace Analizador
 
 
                     case Q12:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q7;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q13:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q13;
-                        else if(cadena[i].ToString() == ";")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ";") {
                             estado = Q14;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
@@ -189,74 +268,120 @@ namespace Analizador
 
 
                     case Q15:
-                        if(cadena[i].ToString() == "f")
+                        if(cadena[i].ToString() == "f") {
                             estado = Q16;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q5;
-                        else if (cadena[i].ToString() == "=")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+
+                        }
+                        else if(cadena[i].ToString() == "=") {
                             estado = Q6;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q16:
-                        if(cadena[i].ToString() == "(")
+                        if(cadena[i].ToString() == "(") {
                             estado = Q17;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q17:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q18;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q19;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
                         break;
 
 
                     case Q18:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q18;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]")) // se busca entre >= <= > < != ==
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]")) {
+                            // se busca entre >= <= > < != ==
                             estado = Q20;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q19:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q19;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))    // se busca entre >= <= > < != ==
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]")) {   // se busca entre >= <= > < != ==
                             estado = Q20;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q20:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]"))     // se busca entre >= <= > < != ==
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[\x3E\x3D|\x3C\x3D|\x3E|\x3C|\x21\x3D|\x3D\x3D]")) {    // se busca entre >= <= > < != ==
                             estado = Q20;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q21;
-                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q23;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
                     case Q21:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"[a-z0-9]")) {
                             estado = Q21;
-                        else if(cadena[i].ToString() == ")")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ")") {
                             estado = Q22;
-                        else
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else {
                             estado = ERROR;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
@@ -265,10 +390,14 @@ namespace Analizador
 
 
                     case Q23:
-                        if(Regex.IsMatch(cadena[i].ToString(), @"\d"))
+                        if(Regex.IsMatch(cadena[i].ToString(), @"\d")) {
                             estado = Q23;
-                        else if (cadena[i].ToString() == ")")
+                            textBoxEstados.Text += "Q" + estado + ", ";
+                        }
+                        else if(cadena[i].ToString() == ")") {
                             estado = Q22;
+                            textBoxEstados.Text += "ERROR";
+                        }
                         break;
 
 
