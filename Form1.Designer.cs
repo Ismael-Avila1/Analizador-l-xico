@@ -32,6 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonAnalizar = new System.Windows.Forms.Button();
             this.textBoxInput = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxEstados = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -79,12 +81,36 @@
             this.textBoxInput.Size = new System.Drawing.Size(270, 35);
             this.textBoxInput.TabIndex = 4;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(48)))), ((int)(((byte)(56)))));
+            this.label3.Location = new System.Drawing.Point(249, 349);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 28);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Estados:";
+            // 
+            // textBoxEstados
+            // 
+            this.textBoxEstados.Enabled = false;
+            this.textBoxEstados.Font = new System.Drawing.Font("Roboto", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxEstados.Location = new System.Drawing.Point(367, 346);
+            this.textBoxEstados.Multiline = true;
+            this.textBoxEstados.Name = "textBoxEstados";
+            this.textBoxEstados.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxEstados.Size = new System.Drawing.Size(270, 99);
+            this.textBoxEstados.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(157)))), ((int)(((byte)(143)))));
-            this.ClientSize = new System.Drawing.Size(932, 403);
+            this.ClientSize = new System.Drawing.Size(932, 457);
+            this.Controls.Add(this.textBoxEstados);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.buttonAnalizar);
             this.Controls.Add(this.label2);
@@ -103,5 +129,7 @@
         private Label label2;
         private Button buttonAnalizar;
         private TextBox textBoxInput;
+        private Label label3;
+        private TextBox textBoxEstados;
     }
 }
